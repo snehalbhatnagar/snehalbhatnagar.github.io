@@ -135,11 +135,13 @@ section.block{padding:84px 0 20px}
 .jobs{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
 .job{border-top:1px solid var(--line);transition:opacity .25s}
 .job:first-child{border-top:0}
-.job>button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:28px minmax(0,2.2fr) minmax(0,1.6fr) 130px 22px;gap:14px;align-items:center;padding:15px 18px;cursor:pointer}
+.job>button{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:28px minmax(0,2.2fr) minmax(0,1.5fr) 175px 22px;gap:14px;align-items:center;padding:15px 18px;cursor:pointer}
 .job>button:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
 .job>button:hover{background:var(--paper-2)}
 .job .st{width:12px;height:12px;border-radius:3px;background:var(--ok);justify-self:center}
 .job .st.local{background:var(--silver)}
+.job .st.live{background:var(--gold);box-shadow:0 0 0 3px #F3E6C4}
+.job .det .lnk{display:flex;gap:18px;flex-wrap:wrap}
 .job .nm{font:600 17.5px/1.3 var(--cond)}
 .job .stack{font:400 13px var(--mono);color:var(--ink-2)}
 .job .dt{font:400 13px var(--mono);color:var(--ink-3);text-align:right}
@@ -248,11 +250,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     <section class="block" id="projects" aria-labelledby="proj-h">
       <div class="sec-head">
         <h2 id="proj-h">Projects, as job runs</h2>
-        <p>Things I have built outside client work, from course projects to hackathons. Filter by stack, and open a run to see what it does and where the code lives.</p>
+        <p>Things I have built outside client work, from course projects to hackathons. Four of them run live in the browser. Filter by stack, and open a run to see what it does, try the demo, or read the code.</p>
       </div>
       <div class="filters" id="filters" role="group" aria-label="Filter projects by stack"></div>
       <div class="jobs" id="jobs"></div>
-      <div class="legend"><span><i style="background:var(--ok)"></i>Code on GitHub</span><span><i style="background:var(--silver)"></i>No public repo</span></div>
+      <div class="legend"><span><i style="background:var(--gold)"></i>Live demo</span><span><i style="background:var(--ok)"></i>Code on GitHub</span><span><i style="background:var(--silver)"></i>No public repo</span></div>
     </section>
 
     <section class="block" id="education" aria-labelledby="edu-h">
@@ -443,7 +445,13 @@ else{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)
   (function f(now){const p=Math.min(1,(now-t0)/1100),v=Math.round(end*(1-Math.pow(1-p,3)));e.target.textContent=v+'%';if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});kpis.forEach(k=>io.observe(k))}
 
 /* ---------- Projects ---------- */
+const PAGES='https://snehalbhatnagar.github.io/';
 const PROJECTS=[
+  {name:'Developer Salary Prediction',stack:'Python, scikit-learn, Streamlit, SQL',date:'2022, rebuilt 2026',tags:['Python','ML','Data quality'],
+   repo:'https://github.com/snehalbhatnagar/SalaryPrediction',demo:PAGES+'SalaryPrediction/',
+   desc:'Estimates a developer\'s annual pay from country, role, education, work arrangement, and experience, using 26,382 cleaned responses from the 2022 Stack Overflow Developer Survey. Gradient-boosted trees predict the median, and quantile models give a 25th to 75th percentile range.',
+   extra:'Held-out mean absolute error is $26.3k against $30.5k for a country-median baseline. The trees are exported to JSON so the demo runs in the browser. The original 2022 code was lost; this is a 2026 rebuild.',
+   skills:['Python','pandas','SQL']},
   {name:'Automated CSV Profiler and Verified Insight Generator',stack:'Python, pandas, NumPy, Matplotlib',date:'Sep 2026',tags:['Python','Data quality','LLMs'],
    repo:'https://github.com/snehalbhatnagar/automated-csv-profiler',
    desc:'A reusable profiler for any single-table CSV: type and role inference, missingness, duplicate and constant columns, IQR outliers, Pearson correlations, and sensitive-field warnings. It writes plots, a JSON summary, and a Markdown report.',
@@ -452,20 +460,24 @@ const PROJECTS=[
   {name:'CareFlow: AI agent prototype',stack:'AI agent, Gloo AI Hackathon',date:'Oct 2026',tags:['LLMs'],
    desc:'A care-coordination prototype that matches incoming requests to available staff and resources and re-plans around scheduling conflicts.',
    extra:'Any consequential action waits for human approval.',skills:['LLMs','Python']},
-  {name:'Online Voting System',stack:'Node.js, Express, MySQL, bcrypt',date:'2024',tags:['Web'],
-   repo:'https://github.com/snehalbhatnagar/Voting-System',
-   desc:'A voting application with separate REST routes for voters, voting, and voting officers, passwords hashed with bcrypt, and data stored in MySQL.',skills:['Node.js','SQL','REST APIs']},
-  {name:'GPT Audio Web App',stack:'Node.js, Express, OpenAI API',date:'Jun 2023',tags:['Web','LLMs'],
-   repo:'https://github.com/snehalbhatnagar/GPT-Web-App',
-   desc:'Ask a question out loud, get the answer from GPT-3.5 read back to you, with the whole conversation shown on screen.',skills:['Node.js','LLMs']},
-  {name:'Salary Prediction System',stack:'Python, Streamlit, MySQL',date:'Nov 2022',tags:['Python','ML'],
-   desc:'An ML application that predicts software engineer salaries by country from a user\'s profile, with a Streamlit front end and MySQL storage.',skills:['Python','SQL']},
+  {name:'Online Voting System',stack:'React, Node.js, Express, MySQL, JWT',date:'2024, updated 2026',tags:['Web'],
+   repo:'https://github.com/snehalbhatnagar/Voting-System',demo:PAGES+'Voting-System/',
+   desc:'Voters register with an OTP-verified phone number and cast exactly one ballot; voting officers see turnout and live results. One-vote-per-voter is enforced by the database.',
+   extra:'Who voted and how they voted are stored in separate tables written in one transaction, so ballots stay secret. Aadhaar numbers are kept only as keyed hashes.',
+   skills:['Node.js','React','SQL','REST APIs']},
+  {name:'Ticketing System',stack:'React, Node.js, Express, MySQL',date:'2022, updated 2026',tags:['Web'],
+   repo:'https://github.com/snehalbhatnagar/Ticketing-System',demo:PAGES+'Ticketing-System/',
+   desc:'Employees sign in to log customer issues, move them through a status workflow, and search or filter the queue. Express REST API with Sequelize over MySQL.',
+   extra:'Passwords are checked server-side against bcrypt hashes, ticket routes require a signed token, and the API has tests against an in-memory database.',
+   skills:['Node.js','React','SQL','REST APIs']},
+  {name:'GPT Audio Web App',stack:'JavaScript, Node.js, Express, OpenAI API',date:'Jun 2023, updated 2026',tags:['Web','LLMs'],
+   repo:'https://github.com/snehalbhatnagar/GPT-Web-App',demo:PAGES+'GPT-Web-App/',
+   desc:'Ask a question out loud and hear the answer: browser speech recognition, a GPT chat completion with conversation context, and speech synthesis.',
+   extra:'The API key stays on the server. The hosted demo runs without a server in echo mode, or with your own key.',
+   skills:['Node.js','LLMs']},
   {name:'College FAQ Bot',stack:'Azure Bot Service, QnA Maker',date:'May 2022',tags:['Azure'],
    repo:'https://github.com/snehalbhatnagar/CollegeFAQBot',
-   desc:'A Telegram bot that answers frequently asked questions about MNIT Jaipur, built on Azure Bot Service and QnA Maker.',skills:['Azure']},
-  {name:'Ticketing System',stack:'React, Node.js, MySQL',date:'Mar 2022',tags:['Web'],
-   repo:'https://github.com/snehalbhatnagar/Ticketing-System',
-   desc:'A web app where employees log in to create, update, and close support tickets. React front end, Node.js back end with Sequelize, MySQL storage.',skills:['Node.js','React','SQL']},
+   desc:'A Telegram bot that answered frequently asked questions about MNIT Jaipur, built on Azure Bot Service and QnA Maker (since retired by Microsoft).',skills:['Azure']},
   {name:'Hotel Room Reservation System',stack:'Java',date:'2022',tags:['Java'],
    repo:'https://github.com/snehalbhatnagar/Hotel-Room-Reservation-System',
    desc:'A desktop application that checks availability across suite types and allots rooms to guests.',skills:['Java']}
@@ -474,14 +486,14 @@ const jobsEl=document.getElementById('jobs');
 PROJECTS.forEach((p,i)=>{
   const d=document.createElement('div');d.className='job';d.dataset.tags=p.tags.join('|');d.dataset.skills=p.skills.join('|');
   const id='job'+i;
-  d.innerHTML=`<button aria-expanded="false" aria-controls="${id}"><span class="st ${p.repo?'':'local'}" title="${p.repo?'Code on GitHub':'No public repo'}"></span><span class="nm">${p.name}</span><span class="stack">${p.stack}</span><span class="dt">${p.date}</span><span class="car" aria-hidden="true">&#9656;</span></button>
-  <div class="det" id="${id}"><p>${p.desc}</p>${p.extra?`<p>${p.extra}</p>`:''}${p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">View code on GitHub</a>`:''}</div>`;
+  d.innerHTML=`<button aria-expanded="false" aria-controls="${id}"><span class="st ${p.demo?'live':p.repo?'':'local'}" title="${p.demo?'Live demo':p.repo?'Code on GitHub':'No public repo'}"></span><span class="nm">${p.name}</span><span class="stack">${p.stack}</span><span class="dt">${p.date}</span><span class="car" aria-hidden="true">&#9656;</span></button>
+  <div class="det" id="${id}"><p>${p.desc}</p>${p.extra?`<p>${p.extra}</p>`:''}<span class="lnk">${p.demo?`<a href="${p.demo}" target="_blank" rel="noopener">Open live demo</a>`:''}${p.repo?`<a href="${p.repo}" target="_blank" rel="noopener">View code on GitHub</a>`:''}</span></div>`;
   const b=d.querySelector('button');b.addEventListener('click',()=>{const o=d.classList.toggle('open');b.setAttribute('aria-expanded',o)});
   jobsEl.appendChild(d);
 });
 jobsEl.firstElementChild.classList.add('open');jobsEl.firstElementChild.querySelector('button').setAttribute('aria-expanded','true');
 
-const TAGS=['All','Python','Data quality','LLMs','Web','Java','Azure','ML'];
+const TAGS=['All','Python','ML','Data quality','LLMs','Web','Java','Azure'];
 const fEl=document.getElementById('filters');
 TAGS.forEach(t=>{const c=document.createElement('button');c.className='chip';c.textContent=t;c.setAttribute('aria-pressed',t==='All');
   c.addEventListener('click',()=>{fEl.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c));
