@@ -163,6 +163,16 @@ section.block{padding:84px 0 20px}
 .card .org{color:var(--ink-2);font-size:15px;margin:2px 0 10px}
 .card p{margin:0;font-size:15px;color:var(--ink-2)}
 .certs{margin-top:18px}
+.cert-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}
+.cert-table th{font:600 13.5px var(--sans);color:var(--ink-3);text-align:left;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+.cert-table td{padding:9px 10px 9px 0;border-bottom:1px solid #E6EAEF;color:var(--ink-2);vertical-align:top}
+.cert-table td:first-child{color:var(--ink);font-weight:500}
+.cert-table tr:last-child td{border-bottom:0}
+.cert-table a{font-weight:600;text-underline-offset:3px}
+.cert-table .exp{display:block;font-size:13px;color:#8A5A1A}
+.cert-table .valid{display:block;font-size:13px;color:#2F7D5B}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (max-width:640px){.cert-table thead{display:none}.cert-table tr{display:grid;grid-template-columns:1fr auto;padding:8px 0;border-bottom:1px solid #E6EAEF}.cert-table td{border:0;padding:1px 0}.cert-table td:first-child{grid-column:1/-1}}
 
 /* contact */
 .sink{margin:84px 0 0;background:var(--ink);color:#E6ECF3;border-radius:16px;padding:42px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
@@ -240,10 +250,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       <div class="layers" id="layers"></div>
 
       <div class="kpis" aria-label="Measured results at MAQ Software">
-        <div class="kpi"><div class="v" data-count="37">0%</div><div class="d">faster data processing on a cloud migration pipeline</div></div>
-        <div class="kpi"><div class="v" data-count="20">0%</div><div class="d">efficiency gained by tuning Spark jobs</div></div>
-        <div class="kpi"><div class="v" data-count="98">0%</div><div class="d">of data anomalies caught before processing</div></div>
-        <div class="kpi"><div class="v" data-count="25">0%</div><div class="d">more reliable pipelines with structured logging</div></div>
+        <div class="kpi"><div class="v" data-count="37">37%</div><div class="d">faster data processing on a cloud migration pipeline</div></div>
+        <div class="kpi"><div class="v" data-count="20">20%</div><div class="d">efficiency gained by tuning Spark jobs</div></div>
+        <div class="kpi"><div class="v" data-count="98">98%</div><div class="d">of data anomalies caught before processing</div></div>
+        <div class="kpi"><div class="v" data-count="25">25%</div><div class="d">more reliable pipelines with structured logging</div></div>
       </div>
     </section>
 
@@ -260,7 +270,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
     <section class="block" id="education" aria-labelledby="edu-h">
       <div class="sec-head">
         <h2 id="edu-h">Education</h2>
-        <p>Computer science foundations from MNIT Jaipur, now a master's in data science at CU Boulder, studied part-time from Spring 2027.</p>
+        <p>Computer science foundations from MNIT Jaipur, now a master's in data science at CU Boulder, studied part-time from Spring 2027. Certifications link to their issuer's verification page where one exists.</p>
       </div>
       <div class="edu">
         <div class="card">
@@ -276,7 +286,21 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
       </div>
       <div class="card certs">
         <h3>Certifications</h3>
-        <p style="margin-top:6px">Microsoft Certified: Fabric Data Engineer Associate (DP-700, 2025) and Fabric Analytics Engineer Associate (2024).</p>
+        <table class="cert-table">
+          <thead><tr><th>Certification</th><th>Issuer</th><th>Issued</th><th><span class="sr">Verify</span></th></tr></thead>
+          <tbody>
+            <tr><td>AI Fluency: Framework and Foundations</td><td>Anthropic</td><td>Sep 2026</td><td><a href="https://verify.skilljar.com/c/uqs9wjsxccgm" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>AI Fluency for Builders</td><td>Anthropic</td><td>Sep 2026</td><td><a href="https://verify.skilljar.com/c/7mj72dtfpwny" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>AI Fluency for Students</td><td>Anthropic</td><td>Sep 2026</td><td><a href="https://verify.skilljar.com/c/kphrjw9828rm" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>AI Capabilities and Limitations</td><td>Anthropic</td><td>Sep 2026</td><td><a href="https://verify.skilljar.com/c/xajjygvkoagy" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>Microsoft Certified: Fabric Data Engineer Associate (DP-700)</td><td>Microsoft</td><td>May 2025 <span class="valid">active, renewed through May 2027</span></td><td><a href="https://learn.microsoft.com/api/credentials/share/en-us/SnehalBhatnagarMAQSoftware-6995/B482654A19904A25?sharingId=5CE973F85EC71037" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>Microsoft Certified: Fabric Analytics Engineer Associate</td><td>Microsoft</td><td>May 2024 <span class="exp">expired May 2025</span></td><td></td></tr>
+            <tr><td>Supervised Machine Learning: Regression and Classification</td><td>Coursera</td><td>Dec 2023</td><td><a href="https://coursera.org/verify/NGVVX6SF77PP" target="_blank" rel="noopener">Verify</a></td></tr>
+            <tr><td>Machine Learning to Deep Learning: Remote Sensing Data Classification</td><td>ISRO</td><td>Jul 2022</td><td></td></tr>
+            <tr><td>Azure Fundamentals, Azure Data Fundamentals, Azure AI Fundamentals</td><td>Microsoft</td><td>2021 to 2022</td><td></td></tr>
+            <tr><td>Advanced Software Engineering Job Simulation</td><td>Walmart USA, Forage</td><td>May 2022</td><td></td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -441,8 +465,10 @@ ROLES.forEach((r,i)=>{
 const kpis=[...document.querySelectorAll('.kpi .v')];
 const fill=el=>{el.textContent=el.dataset.count+'%'};
 if(reduce||!('IntersectionObserver' in window))kpis.forEach(fill);
-else{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;io.unobserve(e.target);const end=+e.target.dataset.count,t0=performance.now();
-  (function f(now){const p=Math.min(1,(now-t0)/1100),v=Math.round(end*(1-Math.pow(1-p,3)));e.target.textContent=v+'%';if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.6});kpis.forEach(k=>io.observe(k))}
+else{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting||document.hidden)return;io.unobserve(e.target);const el=e.target,end=+el.dataset.count,t0=performance.now();
+  // Final values are already in the HTML; the count-up is decoration and always ends on the real number.
+  const stop=setTimeout(()=>fill(el),1500);
+  (function f(now){const p=Math.min(1,(now-t0)/1100),v=Math.round(end*(1-Math.pow(1-p,3)));el.textContent=v+'%';if(p<1)requestAnimationFrame(f);else{clearTimeout(stop);fill(el)}})(t0)})},{threshold:.6});kpis.forEach(k=>io.observe(k))}
 
 /* ---------- Projects ---------- */
 const PAGES='https://snehalbhatnagar.github.io/';
